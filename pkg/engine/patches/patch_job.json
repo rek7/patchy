@@ -1,0 +1,44 @@
+{
+  "description": "{{.PatchDescription}}",
+  "instanceFilter": {
+    "all":true
+  },
+  "displayName" : "{{.PatchName}}",
+  "patchConfig": {
+    "rebootConfig": "NEVER",
+    "apt": {
+    },
+    "yum": {
+    },
+    "zypper": {
+    },
+    "windowsUpdate": {
+    },
+    "preStep": {
+      "linuxExecStepConfig": {
+        "gcsObject": {
+          "bucket": "{{.BucketName}}",
+          "object": "{{.WindowsScriptName}}",
+          "generationNumber": "0"
+        },
+        "interpreter": "SHELL"
+      },
+      "windowsExecStepConfig": {
+        "gcsObject": {
+          "bucket": "{{.BucketName}}",
+          "object": "{{.WindowsScriptName}}",
+          "generationNumber": "0"
+        },
+        "interpreter": "POWERSHELL"
+      }
+    },
+    "migInstancesAllowed": true
+  },
+  "duration": "60s",
+  "rollout": {
+    "mode": "CONCURRENT_ZONES",
+    "disruptionBudget": {
+      "percent": 100
+    }
+  }
+}
